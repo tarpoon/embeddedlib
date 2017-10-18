@@ -6,7 +6,7 @@ plugins {
 buildproperties.publishing {
     zip {
         into('lib'){
-            from 'out/lib'
+            from 'out/lib/libmathy.a'
         }
         into('inc') {
             from 'native-app/inc/mathy.h'
