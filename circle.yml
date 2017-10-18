@@ -1,0 +1,34 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: praqma/native-make:latest
+    working_directory: /workspace
+    steps:
+      - checkout
+      - run:
+          name: Build
+          command: make all
+      - store_artifacts:
+          path: graphy
+          destination: graphy
+  test:
+    docker:
+      - image: praqma/native-make:latest
+    working_directory: /workspace
+    steps:
+      - checkout
+      - run:
+          name: Test
+          command: make test
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master

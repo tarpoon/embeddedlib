@@ -1,0 +1,24 @@
+pipeline {
+    agent {
+        docker { image 'tarpoon/native-make:1.0' }
+    }
+    stages {
+        stage('Build') {
+            steps {
+                sh "make clean"
+                sh "make all"
+            }
+        }
+        stage('Test') {
+            steps {
+                sh "make test"
+            }
+        }
+        stage('Results') {
+            steps {
+                junit 'out/bin/results_junit.xml'
+                archiveArtifacts 'out/bin/main'
+            }
+        }
+    }
+}
