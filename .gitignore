@@ -7,7 +7,7 @@ build/
 
 # Generated version files
 native-app/inc/build.h
-native-app/inc/version.h
+#native-app/inc/version.h
 
 # Prerequisites
 *.d
